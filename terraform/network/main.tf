@@ -37,3 +37,10 @@ resource "aws_internet_gateway" "igw" {
     Name = var.app_name
   }
 }
+
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.vpc.id
+  tags = {
+    Name = "${var.app_name}-private-rtb"
+  }
+}
