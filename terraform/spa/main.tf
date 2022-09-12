@@ -1,3 +1,9 @@
+# ローカル値
+locals {
+  bucket_name  = "${var.app_name}-s3-2022"
+  s3_origin_id = "S3-${var.app_name}"
+}
+
 ####################
 # S3
 ####################

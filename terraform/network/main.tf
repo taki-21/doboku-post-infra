@@ -13,7 +13,7 @@ resource "aws_subnet" "public_subnets" {
 
   availability_zone       = var.azs[count.index]
   cidr_block              = var.public_subnet_cidrs[count.index]
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = true # サブネット内で起動するEC2インスタンスに自動的にパブリックIPを割り当てる
   tags = {
     Name = "${var.app_name}-public-${var.azs_name[count.index]}"
   }
@@ -49,7 +49,7 @@ resource "aws_route_table" "public" {
 # パブリックサブネット用のルートテーブルの中身
 resource "aws_route" "public" {
   route_table_id         = aws_route_table.public.id
-  gateway_id             = aws_internet_gateway.igw.id
+  gateway_id             = aws_internet_gateway.igw.id # VPC内部からの外部向けの通信をIGWへ向ける
   destination_cidr_block = "0.0.0.0/0"
 }
 
